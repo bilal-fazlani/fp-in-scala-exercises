@@ -5,7 +5,7 @@ import scala.annotation.tailrec
 object E001TailRec {
 
   def main(args: Array[String]): Unit = {
-
+    
     def fib(number: Int): Int =
       number match {
         case 1 => 0
