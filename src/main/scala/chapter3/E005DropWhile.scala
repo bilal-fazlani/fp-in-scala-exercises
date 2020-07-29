@@ -4,7 +4,12 @@ import scala.annotation.tailrec
 
 object E005DropWhile extends App {
 
-  sealed trait List[+A]
+  sealed trait List[+A]{
+    override def toString: String = this match {
+      case c@Cons(x, xs) => "List(...)"
+      case Nil => "List()"
+    }
+  }
 
   case class Cons[+A](x: A, xs: List[A]) extends List[A]
 
@@ -30,20 +35,18 @@ object E005DropWhile extends App {
       case Cons(x, _) => Some(x)
     }
 
+    @tailrec
     def drop[T](list: List[T], n: Int): List[T] = list match {
       case Nil => Nil
       case x if n == 0 => x
       case Cons(x, xs) => drop(xs, n - 1)
     }
     
-    def dropWhile[T](list:List[T], f:T=>Boolean):List[T] = {
-      def loop(list:List[T], met:Boolean):List[T] = list match {
-        case c@Cons(x, xs) if f(x) => if(met) c else loop(xs, ???)
-        case Cons(x, xs) => ???
-        case Nil => Nil
-      }
-      loop(list, false)
+    @tailrec
+    def dropWhile[T](list:List[T], f:T=>Boolean):List[T] = list match {
+      case Nil => Nil
+      case l@Cons(x, xs) if(f(x)) => dropWhile(xs, f)
+      case l@Cons(x, xs) => l
     }
   }
-
 }
