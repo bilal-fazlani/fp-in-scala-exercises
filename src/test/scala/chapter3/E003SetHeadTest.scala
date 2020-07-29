@@ -9,6 +9,6 @@ class E003SetHeadTest extends FunSuite {
   }
 
   test("set head for List") {
-    assertEquals(List.setHead(List(3, 3), 4), List(4,3))
+    assertEquals(List.setHead(List(3, 3), 4), List(4, 3))
   }
 }

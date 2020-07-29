@@ -4,11 +4,12 @@ import scala.annotation.tailrec
 
 object E005DropWhile extends App {
 
-  sealed trait List[+A]{
-    override def toString: String = this match {
-      case c@Cons(x, xs) => "List(...)"
-      case Nil => "List()"
-    }
+  sealed trait List[+A] {
+    override def toString: String =
+      this match {
+        case c @ Cons(x, xs) => "List(...)"
+        case Nil             => "List()"
+      }
   }
 
   case class Cons[+A](x: A, xs: List[A]) extends List[A]
@@ -20,33 +21,38 @@ object E005DropWhile extends App {
       if (t.isEmpty) Nil
       else Cons(t.head, apply(t.tail: _*))
 
-    def tail[T](list: List[T]) = list match {
-      case Nil => Nil
-      case Cons(x, xs) => xs
-    }
+    def tail[T](list: List[T]): List[T] =
+      list match {
+        case Nil         => Nil
+        case Cons(x, xs) => xs
+      }
 
-    def setHead[T](list: List[T], x: T) = list match {
-      case Cons(y, ys) => Cons(x, ys)
-      case Nil => Nil
-    }
+    def setHead[T](list: List[T], x: T): List[T] =
+      list match {
+        case Cons(y, ys) => Cons(x, ys)
+        case Nil         => Nil
+      }
 
-    def headOption[T](list: List[T]) = list match {
-      case Nil => None
-      case Cons(x, _) => Some(x)
-    }
+    def headOption[T](list: List[T]): Option[T] =
+      list match {
+        case Nil        => None
+        case Cons(x, _) => Some(x)
+      }
 
     @tailrec
-    def drop[T](list: List[T], n: Int): List[T] = list match {
-      case Nil => Nil
-      case x if n == 0 => x
-      case Cons(x, xs) => drop(xs, n - 1)
-    }
-    
+    def drop[T](list: List[T], n: Int): List[T] =
+      list match {
+        case Nil         => Nil
+        case x if n == 0 => x
+        case Cons(_, xs) => drop(xs, n - 1)
+      }
+
     @tailrec
-    def dropWhile[T](list:List[T], f:T=>Boolean):List[T] = list match {
-      case Nil => Nil
-      case l@Cons(x, xs) if(f(x)) => dropWhile(xs, f)
-      case l@Cons(x, xs) => l
-    }
+    def dropWhile[T](list: List[T], f: T => Boolean): List[T] =
+      list match {
+        case Nil                 => Nil
+        case Cons(x, xs) if f(x) => dropWhile(xs, f)
+        case l @ Cons(_, _)      => l
+      }
   }
 }

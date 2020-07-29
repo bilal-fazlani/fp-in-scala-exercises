@@ -1,7 +1,5 @@
 package chapter3
 
-import scala.annotation.tailrec
-
 object E003SetHead extends App {
 
   sealed trait List[+A]
@@ -15,20 +13,23 @@ object E003SetHead extends App {
       if (t.isEmpty) Nil
       else Cons(t.head, apply(t.tail: _*))
 
-    def tail[T](list: List[T]) = list match {
-      case Nil => Nil
-      case Cons(x, xs) => xs
-    }
+    def tail[T](list: List[T]) =
+      list match {
+        case Nil         => Nil
+        case Cons(x, xs) => xs
+      }
 
-    def setHead[T](list:List[T], x:T) = list match {
-      case Cons(y, ys) => Cons(x, ys)
-      case Nil => Nil
-    }
-    
-    def headOption[T](list: List[T]) = list match {
-      case Nil => None
-      case Cons(x, _) => Some(x)
-    }
+    def setHead[T](list: List[T], x: T): List[T] =
+      list match {
+        case Cons(_, ys) => Cons(x, ys)
+        case Nil         => Nil
+      }
+
+    def headOption[T](list: List[T]) =
+      list match {
+        case Nil        => None
+        case Cons(x, _) => Some(x)
+      }
   }
 
 }
