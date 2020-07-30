@@ -15,26 +15,30 @@ object E004Drop extends App {
       if (t.isEmpty) Nil
       else Cons(t.head, apply(t.tail: _*))
 
-    def tail[T](list: List[T]) = list match {
-      case Nil => Nil
-      case Cons(x, xs) => xs
-    }
+    def tail[T](list: List[T]) =
+      list match {
+        case Nil         => Nil
+        case Cons(x, xs) => xs
+      }
 
-    def setHead[T](list: List[T], x: T) = list match {
-      case Cons(y, ys) => Cons(x, ys)
-      case Nil => Nil
-    }
+    def setHead[T](list: List[T], x: T) =
+      list match {
+        case Cons(y, ys) => Cons(x, ys)
+        case Nil         => Nil
+      }
 
-    def headOption[T](list: List[T]) = list match {
-      case Nil => None
-      case Cons(x, _) => Some(x)
-    }
-    
-    def drop[T](list:List[T], n:Int): List[T] = list match {
-      case Nil => Nil
-      case x if n == 0 => x
-      case Cons(x, xs) => drop(xs, n-1)
-    }
+    def headOption[T](list: List[T]) =
+      list match {
+        case Nil        => None
+        case Cons(x, _) => Some(x)
+      }
+
+    def drop[T](list: List[T], n: Int): List[T] =
+      list match {
+        case Nil         => Nil
+        case x if n == 0 => x
+        case Cons(x, xs) => drop(xs, n - 1)
+      }
   }
 
 }

@@ -9,10 +9,10 @@ class E0051AppendTest extends FunSuite {
   }
 
   test("append for a list1 should be list1 + list2") {
-    assertEquals(List.append(List(1,2), List(3,4)), List(1,2,3,4))
+    assertEquals(List.append(List(1, 2), List(3, 4)), List(1, 2, 3, 4))
   }
 
   test("append for a list1 and elem should be list1 + elem") {
-    assertEquals(List.append(List(1,2), 4), List(1,2,4))
+    assertEquals(List.append(List(1, 2), 4), List(1, 2, 4))
   }
 }
