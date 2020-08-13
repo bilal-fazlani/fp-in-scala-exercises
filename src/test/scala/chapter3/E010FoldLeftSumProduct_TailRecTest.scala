@@ -23,4 +23,12 @@ class E010FoldLeftSumProduct_TailRecTest extends FunSuite {
   test("product of list") {
     assertEquals(List.product(List(1, 2, 4)), 8)
   }
+
+  test("length of Nil should be 0") {
+    assertEquals(List.length(Nil), 0)
+  }
+
+  test("length of list") {
+    assertEquals(List.length(List(1, 4)), 2)
+  }
 }
