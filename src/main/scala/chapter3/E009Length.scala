@@ -89,15 +89,11 @@ object E009Length extends App {
       loop(Nil, list)
     }
 
-    def foldRight[I, O](list: List[I], zero: O)(f: (I, O) => O): O = {
-      @tailrec
-      def loop(acc: O, remaining: List[I]): O =
-        remaining match {
-          case Nil         => acc
-          case Cons(x, xs) => loop(f(x, acc), xs)
-        }
-      loop(zero, list)
-    }
+    def foldRight[I, O](list: List[I], zero: O)(f: (I, O) => O): O =
+      list match {
+        case Nil         => zero
+        case Cons(i, is) => f(i, foldRight(is, zero)(f))
+      }
 
     def length[A](list: List[A]): Int = foldRight(list, 0)((_, x) => x + 1)
 

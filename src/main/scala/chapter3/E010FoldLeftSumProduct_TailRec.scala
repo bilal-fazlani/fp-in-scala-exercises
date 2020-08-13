@@ -2,7 +2,7 @@ package chapter3
 
 import scala.annotation.tailrec
 
-object E010_1ReduceSumProduct extends App {
+object E010FoldLeftSumProduct_TailRec extends App {
 
   sealed trait List[+A] {
     override def toString: String = {
@@ -89,7 +89,13 @@ object E010_1ReduceSumProduct extends App {
       loop(Nil, list)
     }
 
-    def foldRight[I, O](list: List[I], zero: O)(f: (I, O) => O): O = {
+    def foldRight[I, O](list: List[I], zero: O)(f: (I, O) => O): O =
+      list match {
+        case Nil         => zero
+        case Cons(i, is) => f(i, foldRight(is, zero)(f))
+      }
+
+    def foldLeft[I, O](list: List[I], zero: O)(f: (I, O) => O): O = {
       @tailrec
       def loop(acc: O, remaining: List[I]): O =
         remaining match {
@@ -99,18 +105,7 @@ object E010_1ReduceSumProduct extends App {
       loop(zero, list)
     }
 
-    def reduce[A](list: List[A], zero: A)(f: (A, A) => A): A = {
-      @tailrec
-      def loop(acc: A, remaining: List[A]): A = {
-        remaining match {
-          case Cons(x, xs) => loop(f(x, acc), xs)
-          case Nil         => acc
-        }
-      }
-      loop(zero, list)
-    }
-
-    def sum(list: List[Int]): Int     = reduce(list, 0)(_ + _)
-    def product(list: List[Int]): Int = reduce(list, 1)(_ * _)
+    def sum(list: List[Int]): Int     = foldLeft(list, 0)(_ + _)
+    def product(list: List[Int]): Int = foldLeft(list, 1)(_ * _)
   }
 }

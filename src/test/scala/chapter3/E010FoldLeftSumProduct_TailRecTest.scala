@@ -1,9 +1,9 @@
 package chapter3
 
-import chapter3.E007FoldRightSumProduct_TailRec._
+import chapter3.E010FoldLeftSumProduct_TailRec._
 import munit.FunSuite
 
-class E007FoldRightSumProduct_TailRecTest extends FunSuite {
+class E010FoldLeftSumProduct_TailRecTest extends FunSuite {
   test("sum for a Nil should be 0") {
     assertEquals(List.sum(Nil), 0)
   }
