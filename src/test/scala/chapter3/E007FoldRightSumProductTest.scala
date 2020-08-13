@@ -4,6 +4,12 @@ import chapter3.E007FoldRightSumProduct._
 import munit.FunSuite
 
 class E007FoldRightSumProductTest extends FunSuite {
+  test("foldRight") {
+    val list   = List("A", "B", "C")
+    val result = List.foldRight(list, "")(_ + " " + _)
+    assertNoDiff(result, "A B C")
+  }
+
   test("sum for a Nil should be 0") {
     assertEquals(List.sum(Nil), 0)
   }
