@@ -2,7 +2,7 @@ package chapter3
 
 import scala.annotation.tailrec
 
-object E009Length extends App {
+object E010_1ReduceSumProduct extends App {
 
   sealed trait List[+A] {
     override def toString: String = {
@@ -99,9 +99,18 @@ object E009Length extends App {
       loop(zero, list)
     }
 
-    def length[A](list: List[A]): Int = foldRight(list, 0)((_, x) => x + 1)
+    def reduce[A](list: List[A], zero: A)(f: (A, A) => A): A = {
+      @tailrec
+      def loop(acc: A, remaining: List[A]): A = {
+        remaining match {
+          case Cons(x, xs) => loop(f(x, acc), xs)
+          case Nil         => acc
+        }
+      }
+      loop(zero, list)
+    }
 
-    def sum(list: List[Int]): Int     = foldRight(list, 0)(_ + _)
-    def product(list: List[Int]): Int = foldRight(list, 1)(_ * _)
+    def sum(list: List[Int]): Int     = reduce(list, 0)(_ + _)
+    def product(list: List[Int]): Int = reduce(list, 1)(_ * _)
   }
 }

@@ -2,7 +2,7 @@ package chapter3
 
 import scala.annotation.tailrec
 
-object E0051Append extends App {
+object E005_1Append extends App {
 
   sealed trait List[+A] {
     override def toString: String =

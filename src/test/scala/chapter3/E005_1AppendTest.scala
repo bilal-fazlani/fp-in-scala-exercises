@@ -1,9 +1,9 @@
 package chapter3
 
-import chapter3.E0051Append._
+import chapter3.E005_1Append._
 import munit.FunSuite
 
-class E0051AppendTest extends FunSuite {
+class E005_1AppendTest extends FunSuite {
   test("append for a Nil list1 should be list2") {
     assertEquals(List.append(Nil, List(1)), List(1))
   }

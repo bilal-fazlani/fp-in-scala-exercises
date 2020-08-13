@@ -89,10 +89,10 @@ object E007FoldRightSumProduct extends App {
       loop(Nil, list)
     }
 
-    def foldRight[A, B](list: List[A], zero: B)(f: (A, B) => B): B =
+    def foldRight[I, O](list: List[I], zero: O)(f: (I, O) => O): O =
       list match {
         case Nil         => zero
-        case Cons(x, xs) => f(x, foldRight(xs, zero)(f))
+        case Cons(i, is) => f(i, foldRight(is, zero)(f))
       }
 
     def sum(list: List[Int]): Int     = foldRight(list, 0)(_ + _)
