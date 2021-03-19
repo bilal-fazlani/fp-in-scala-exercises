@@ -28,4 +28,19 @@ class E001OptionTest extends FunSuite {
     val some = Some(4)
     assertEquals(some.flatMap(i => Some(i + 1)), Some(5))
   }
+
+  test("filter should return None for false and None") {
+    val none: Option[Int] = None
+    assertEquals(none.filter(_ > 0), None)
+  }
+
+  test("filter should return Some for true and Some") {
+    val none: Option[Int] = Some(3)
+    assertEquals(none.filter(_ > 0), Some(3))
+  }
+
+  test("filter should return None for false and Some") {
+    val none: Option[Int] = Some(3)
+    assertEquals(none.filter(_ < 0), None)
+  }
 }

@@ -14,6 +14,9 @@ object E001Option {
         case None           => None
       }
     }
+
+    def filter(f: A => Boolean): Option[A] =
+      this.flatMap(a => if (f(a)) this else None)
   }
 
   case class Some[+A](value: A) extends Option[A]
