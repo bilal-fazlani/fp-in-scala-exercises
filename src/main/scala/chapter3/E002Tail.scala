@@ -1,7 +1,5 @@
 package chapter3
 
-import scala.annotation.tailrec
-
 object E002Tail extends App {
   sealed trait List[+A]
   case class Cons[+A](x: A, xs: List[A]) extends List[A]

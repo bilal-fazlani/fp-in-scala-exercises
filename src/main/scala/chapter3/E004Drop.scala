@@ -1,7 +1,5 @@
 package chapter3
 
-import scala.annotation.tailrec
-
 object E004Drop extends App {
 
   sealed trait List[+A]

@@ -1,7 +1,5 @@
 package chapter3
 
-import scala.annotation.tailrec
-
 object E001SumProduct extends App {
   sealed trait List[+A]
 
