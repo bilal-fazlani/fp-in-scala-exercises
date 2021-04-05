@@ -34,18 +34,19 @@ object E002Variance {
       .andThen(divideByN.curried(count))
       .apply(seq)
 
-  private val validate: Seq[Double] => Option[Seq[Double]] =
-    seq => if (seq.length <= 1) None else Some(seq)
+  private val validate: Seq[Double] => Boolean = seq => seq.length > 1
 
   private val variance = (seq: Seq[Double]) =>
-    validate(seq)
+    Some(seq)
+      .filter(validate)
       .flatMap(mean)
       .map((differentialsSquaredAndDivided _).curried)
       .map(_(seq))
+      .fold[Int => Option[Double]](_ => None)(f => x => Some(f(x)))
 
   def sampleVariance(seq: Seq[Double]): Option[Double] =
-    variance(seq).map(_(seq.length))
+    variance(seq)(seq.length)
 
   def populationVariance(seq: Seq[Double]): Option[Double] =
-    variance(seq).map(_(seq.length - 1))
+    variance(seq)(seq.length - 1)
 }
