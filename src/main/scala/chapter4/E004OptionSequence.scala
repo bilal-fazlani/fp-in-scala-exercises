@@ -12,5 +12,5 @@ object E004OptionSequence {
 
   //sequence implemented in terms of traverse
   def sequence[A](seq: Seq[Option[A]]): Option[Seq[A]] =
-    E005OptionTraverse.traverse(seq)(_.map(identity))
+    E005OptionTraverse.traverse(seq)(identity)
 }
